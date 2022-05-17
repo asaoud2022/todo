@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"todo/app/controllers"
 	"github.com/asaoud2022/todo/config"
 	"github.com/asaoud2022/todo/database"
 	"github.com/gofiber/fiber/v2"
