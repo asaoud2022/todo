@@ -1,11 +1,10 @@
-// the todos module
-package todos
+package repos
 
 import (
 	// import modules
 	"strconv"
 	"todo/database"
-	"todo/models"
+	"todo/app/models"
 
 	// import packages
 	"github.com/gofiber/fiber/v2"

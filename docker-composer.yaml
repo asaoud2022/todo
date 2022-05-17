@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  maintainer-service:
+    container_name: maintainer-service
+    build:
+      context: .
+      target: dev
+    volumes:
+    - .:/app:rw,delegated
+    networks:
+    - maintainer_network
+    ports:
+    - 3000:3000
+    - 2345:2345
+
+networks:
+  maintainer_network:
+    name: maintainer_network
