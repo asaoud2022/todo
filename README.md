@@ -1,5 +1,5 @@
 # Go-todo-app-using-Go-Fiber-and-Gorm
-Go todo app using Go Fiber, Gorm, and SQLite
+Go todo app using Go Fiber, Gorm, and Postgres
 
 This app uses [AIR](https://github.com/cosmtrek/air). AIR is used to Live reload for Go apps
 
