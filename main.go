@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"todo/app/controllers"
+	"github.com/asaoud2022/todo/app/tasks"
 	"github.com/asaoud2022/todo/config"
 	"github.com/asaoud2022/todo/database"
 	"github.com/gofiber/fiber/v2"
@@ -19,7 +19,7 @@ func main() {
 	h := database.Init(&c)
 	app := fiber.New()
 
-	controllers.RegisterRoutes(app, h)
+	tasks.RegisterRoutes(app, h)
 
 	app.Listen(c.Port)
 }

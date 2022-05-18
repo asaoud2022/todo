@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"todo/app/models"
+	"github.com/asaoud2022/todo/app/models"
 	"github.com/asaoud2022/todo/config"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
