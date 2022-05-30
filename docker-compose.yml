@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   app:
-    container_name: golang_container
+    container_name: learning_container
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -21,11 +21,11 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - postgresdb
+      - learning-postgres
     networks:
       - learning
 
-  postgresdb:
+  learning-postgres:
     image: postgres:latest
     container_name: postgres_container
     environment:
@@ -34,13 +34,28 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - DATABASE_HOST=${DB_HOST}
     ports:
-      - '1234:5432'
+      - '5432:5432'
     volumes:
       - ./pg_data:/var/lib/postgresql/data
     networks:
       - learning
 
-  postgresdb_test:
+
+pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      -  learning-postgre
+    ports:
+      - "5050:80"
+    networks:
+      - learning
+    restart: unless-stopped
+
+learning-postgres_test:
     image: postgres:latest
     container_name: learning-postgres
     environment:
@@ -55,9 +70,13 @@ services:
     networks:
       - learning
 
+#volumes:
+#  pg_data:
+#  pg_data_test:
+
 volumes:
-  pg_data:
-  pg_data_test:
+  api:
+  database_postgres:    
 
 # Networks to be created to facilitate communication between containers
 networks:
