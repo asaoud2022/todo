@@ -1,6 +1,7 @@
 package config
 
 import (
+	"html/template"
 	"github.com/spf13/viper"
 )
 
@@ -43,6 +44,8 @@ type Config struct {
 	SessionCookieSecure          bool `mapstructure:"MW_FIBER_SESSION_COOKIESECURE"`
 	SessionExpiration            string `mapstructure:"MW_FIBER_SESSION_EXPIRATION"`
 	SessionStorageGCInterval     string `mapstructure:"MW_FIBER_SESSION_STORAGE_GCINTERVAL"`
+
+	TemplateCache map[string]*template.Template
 
 	
 }

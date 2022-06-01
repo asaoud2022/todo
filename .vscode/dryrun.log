@@ -1,4 +1,6 @@
+make.exe --dry-run --always-make --keep-going --print-directory
 make: Entering directory 'c:/rcaf/todo'
 go run main.go
+ 
 make: Leaving directory 'c:/rcaf/todo'
  
