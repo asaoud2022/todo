@@ -1,0 +1,4 @@
+make: Entering directory 'c:/rcaf/todo'
+go run main.go
+make: Leaving directory 'c:/rcaf/todo'
+ 

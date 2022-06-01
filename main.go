@@ -21,18 +21,47 @@ func main() {
 
 	// Connect to database
 	_, err1 := repository.Connect(&c)
+
 	if err1 != nil {
 		log.Fatal(err1)
+	}
+
+	//Connect to redis
+	_, err = repository.ConnectStore(&c)
+	if err != nil {
+		panic("can't connect to Redis")
 	}
 
 	// Create a new Fiber instance
 	app := fiber.New()
 
+	setupRoutes(app)
+
+	err = app.Listen(c.Port)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func hello(c *fiber.Ctx) error {
+	return c.SendString("Hello, World 👋!")
+}
+
+func setupRoutes(app *fiber.App) {
 	// Response with a hello message for calling root path
 	app.Get("/", hello)
 
 	// Use logger
 	app.Use(logger.New())
+	/*
+		authGroup := app.group("/auth")
+		authGroup.Get("/resetPassword/:token", services.GetResetPassword)
+		authGroup.Post("/resetPassword", services.CreatePasswordReset)
+		authGroup.Patch("/resetPassword", services.ResetPassword)
+		authGroup.Post("/logout", services.Logout)
+		authGroup.Post("/signup", services.Signup)
+		authGroup.Post("/login", services.Login)
+	*/
 
 	// Group User related APIs
 	userGroup := app.Group("/user")
@@ -52,12 +81,4 @@ func main() {
 	taskGroup.Put("/:id", handlers.UpdateTask)
 	taskGroup.Delete("/:id", handlers.DeleteTask)
 
-	err = app.Listen(c.Port)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func hello(c *fiber.Ctx) error {
-	return c.SendString("Hello, World 👋!")
 }

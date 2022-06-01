@@ -12,9 +12,6 @@ import (
 )
 
 var db *gorm.DB
-
-var err error
-
 var (
 	Task = NewTaskRepository()
 	User = NewUserRepository()

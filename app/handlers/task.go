@@ -20,6 +20,7 @@ func init() {
 func GetAllTasks(c *fiber.Ctx) error {
 	tasks := taskRepository.FindAll()
 
+	//TODO:: Plugin Authentication check
 	resp := models.Response{
 		Code:    http.StatusOK,
 		Body:    tasks,
@@ -46,6 +47,9 @@ func GetSingleTask(c *fiber.Ctx) error {
 	}
 
 	task, err := taskRepository.FindByID(uint64(id))
+
+	//TODO:: Plugin Authentication check
+
 	if err != nil {
 		errorResp := models.Response{
 			Code:    http.StatusNotFound,
@@ -81,6 +85,8 @@ func GetSingleTask(c *fiber.Ctx) error {
 // AddNewTask adds new task
 func AddNewTask(c *fiber.Ctx) error {
 	task := &models.Task{}
+
+	//TODO:: Plugin Authentication check
 
 	err := c.BodyParser(task)
 
